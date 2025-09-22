@@ -1,0 +1,115 @@
+// ==========================================================================
+// MODAL COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: alpha($dark-green, 0.8);
+  z-index: z('modal');
+  @extend %flex-center;
+  padding: $spacing-lg;
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: alpha($dark-green, 0.8);
+    z-index: z('modal-backdrop');
+  }
+
+  &__dialog {
+    background-color: $white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-xl;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    z-index: z('modal');
+  }
+
+  &__header {
+    padding: $spacing-lg $spacing-xl;
+    border-bottom: 1px solid $light-gray;
+    @extend %flex-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__close {
+    @extend %button-reset;
+    font-size: $font-size-lg;
+    padding: $spacing-xs;
+    border-radius: $border-radius-base;
+    color: $text-secondary;
+    transition: all $transition-base;
+
+    &:hover,
+    &:focus {
+      background-color: $bg-secondary;
+      color: $text-primary;
+    }
+  }
+
+  &__body {
+    padding: $spacing-xl;
+  }
+
+  &__footer {
+    padding: $spacing-lg $spacing-xl;
+    border-top: 1px solid $light-gray;
+    @extend %flex-between;
+
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  }
+
+  &__actions {
+    @extend %flex-center;
+    gap: $spacing-sm;
+  }
+
+  // Modal sizes
+  &--sm {
+    .modal__dialog {
+      max-width: 400px;
+    }
+  }
+
+  &--lg {
+    .modal__dialog {
+      max-width: 800px;
+    }
+  }
+
+  &--full {
+    padding: 0;
+
+    .modal__dialog {
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+// ==========================================================================
+// DEFAULT THEME
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+
+// Theme-specific overrides and customizations
+// This file contains theme-specific styles that override the base styles
+
+.theme-default {
+  // Global theme colors
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+
+  // Text colors
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-muted: #{$text-muted};
+
+  // Background colors
+  --bg-primary: #{$bg-primary};
+  --bg-secondary: #{$bg-secondary};
+  --bg-accent: #{$bg-accent};
+
+  // Apply theme colors to body
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+// Theme-specific component overrides
+.theme-default {
+  .btn--primary {
+    background-color: var(--primary-color);
+
+    &:hover:not(:disabled) {
+      background-color: var(--secondary-color);
+    }
+  }
+
+  .card {
+    border: 1px solid var(--bg-secondary);
+  }
+
+  .form__control:focus {
+    border-color: var(--primary-color);
+  }
+}

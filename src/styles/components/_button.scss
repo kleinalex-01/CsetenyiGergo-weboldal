@@ -1,0 +1,50 @@
+// ==========================================================================
+// BUTTON COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+
+.btn {
+  @include button-base;
+
+  // Button variants
+  &--primary {
+    @include button-primary;
+  }
+
+  &--secondary {
+    @include button-secondary;
+  }
+
+  // Button sizes
+  &--sm {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+  }
+
+  &--lg {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+  }
+
+  // Button states
+  &--disabled,
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Button with icons
+  &--icon {
+    @extend %flex-center;
+    gap: $spacing-sm;
+  }
+
+  // Full width button
+  &--full {
+    width: 100%;
+  }
+}

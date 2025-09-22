@@ -1,0 +1,38 @@
+// ==========================================================================
+// HEADER LAYOUT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/placeholders' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  border-bottom: 1px solid $light-gray;
+  z-index: z('fixed');
+  box-shadow: $shadow-sm;
+
+  &__container {
+    @extend %container;
+    @extend %flex-between;
+    padding: $spacing-md 0;
+  }
+
+  &__logo {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  &__nav {
+    @extend %flex-center;
+  }
+}

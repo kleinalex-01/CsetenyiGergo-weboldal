@@ -1,0 +1,54 @@
+// ==========================================================================
+// MAIN SCSS FILE - 7+1 Architecture
+// ==========================================================================
+
+// 1. ABSTRACTS - Variables, mixins, functions, placeholders
+// -----------------------------------------------------------------------------
+// These are the foundation - no CSS output yet
+@use 'abstracts/variables' as *;
+@use 'abstracts/functions' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/placeholders' as *;
+
+// 2. VENDORS - Third-party styles
+// -----------------------------------------------------------------------------
+// External libraries and frameworks
+@use 'vendors/normalize';
+
+// 3. BASE - Reset, typography, utilities
+// -----------------------------------------------------------------------------
+// Unclassed HTML elements and global styles
+@use 'base/base';
+@use 'base/fonts';
+@use 'base/typography';
+@use 'base/helpers';
+
+// 4. LAYOUT - Layout-specific styles
+// -----------------------------------------------------------------------------
+// Major layout components (header, footer, sidebar, etc.)
+@use 'layout/header';
+@use 'layout/footer';
+@use 'layout/sidebar';
+@use 'layout/navigation';
+
+// 5. COMPONENTS - Reusable UI components
+// -----------------------------------------------------------------------------
+// Specific UI components (buttons, cards, modals, etc.)
+@use 'components/button';
+@use 'components/card';
+@use 'components/modal';
+@use 'components/form';
+
+// 6. PAGES - Page-specific styles
+// -----------------------------------------------------------------------------
+// Page-specific overrides
+@use 'pages/home';
+@use 'pages/about';
+@use 'pages/services';
+@use 'pages/gallery';
+@use 'pages/contact';
+
+// 7. THEMES - Theme-specific styles
+// -----------------------------------------------------------------------------
+// Theme overrides and variations
+@use 'themes/default';

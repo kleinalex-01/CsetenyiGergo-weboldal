@@ -1,0 +1,196 @@
+// ==========================================================================
+// BASE STYLES
+// ==========================================================================
+
+@use '../abstracts/variables';
+@use '../abstracts/functions';
+@use '../abstracts/placeholders' as *;
+
+// CSS Reset and base styles=====================================================================
+// BASE STYLES
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+
+// CSS Reset and base styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background-color: $bg-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Focus styles
+:focus {
+  outline: 2px solid $primary-color;
+  outline-offset: 2px;
+}
+
+// Selection
+::selection {
+  background-color: alpha($primary-color, 0.2);
+  color: $text-primary;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $light-gray;
+  border-radius: $border-radius-full;
+
+  &:hover {
+    background: $text-secondary;
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Form elements
+input,
+button,
+select,
+optgroup,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
+button {
+  @extend %button-reset;
+}
+
+input,
+textarea,
+select {
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $light-gray;
+  border-radius: $border-radius-base;
+  background-color: $white;
+  color: $text-primary;
+  transition: border-color $transition-base, box-shadow $transition-base;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px alpha($primary-color, 0.1);
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+// Links
+a {
+  @extend %link-reset;
+  color: $primary-color;
+  transition: color $transition-base;
+
+  &:hover,
+  &:focus {
+    color: $secondary-color;
+  }
+}
+
+// Lists
+ul,
+ol {
+  @extend %list-reset;
+}
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $spacing-lg;
+}
+
+th,
+td {
+  padding: $spacing-sm $spacing-md;
+  text-align: left;
+  border-bottom: 1px solid $light-gray;
+}
+
+th {
+  font-weight: $font-weight-semibold;
+  background-color: $bg-secondary;
+}
+
+// Code
+code,
+pre {
+  font-family: $font-family-mono;
+  font-size: 0.875em;
+}
+
+code {
+  padding: 0.125rem 0.25rem;
+  background-color: $bg-secondary;
+  border-radius: $border-radius-sm;
+  color: $text-primary;
+}
+
+pre {
+  padding: $spacing-md;
+  background-color: $bg-secondary;
+  border-radius: $border-radius-base;
+  overflow-x: auto;
+  margin-bottom: $spacing-md;
+
+  code {
+    background: none;
+    padding: 0;
+  }
+}
+
+// Blockquotes
+blockquote {
+  margin: $spacing-lg 0;
+  padding: $spacing-md $spacing-lg;
+  border-left: 4px solid $primary-color;
+  background-color: $bg-accent;
+  font-style: italic;
+  color: $text-secondary;
+}
+
+// Horizontal rules
+hr {
+  border: none;
+  height: 1px;
+  background-color: $light-gray;
+  margin: $spacing-2xl 0;
+}

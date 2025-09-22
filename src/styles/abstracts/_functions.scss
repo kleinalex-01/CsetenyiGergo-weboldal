@@ -1,0 +1,122 @@
+// ==========================================================================
+// FUNCTIONS
+// ==========================================================================
+
+@use 'variables' as *;
+
+// Color functions
+// -----------------------------------------------------------------------------
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+// Get color from map
+@function color($color-name) {
+  $colors: (
+    'primary': $primary-color,
+    'secondary': $secondary-color,
+    'accent': $accent-color,
+    'success': $success-color,
+    'white': $white,
+    'off-white': $off-white,
+    'light-gray': $light-gray,
+    'dark-green': $dark-green,
+    'darker-green': $darker-green,
+    'text-primary': $text-primary,
+    'text-secondary': $text-secondary,
+    'text-muted': $text-muted,
+    'bg-primary': $bg-primary,
+    'bg-secondary': $bg-secondary,
+    'bg-accent': $bg-accent,
+    'bg-dark': $bg-dark
+  );
+
+  @return map-get($colors, $color-name);
+}
+
+// Spacing function
+@function spacing($size) {
+  $spacings: (
+    'xs': $spacing-xs,
+    'sm': $spacing-sm,
+    'md': $spacing-md,
+    'lg': $spacing-lg,
+    'xl': $spacing-xl,
+    '2xl': $spacing-2xl,
+    '3xl': $spacing-3xl,
+    '4xl': $spacing-4xl
+  );
+
+  @return map-get($spacings, $size);
+}
+
+// Font size function
+@function font-size($size) {
+  $sizes: (
+    'xs': $font-size-xs,
+    'sm': $font-size-sm,
+    'base': $font-size-base,
+    'lg': $font-size-lg,
+    'xl': $font-size-xl,
+    '2xl': $font-size-2xl,
+    '3xl': $font-size-3xl,
+    '4xl': $font-size-4xl,
+    '5xl': $font-size-5xl
+  );
+
+  @return map-get($sizes, $size);
+}
+
+// Z-index function
+@function z($layer) {
+  $layers: (
+    'dropdown': $z-dropdown,
+    'sticky': $z-sticky,
+    'fixed': $z-fixed,
+    'header': $z-header,
+    'modal-backdrop': $z-modal-backdrop,
+    'modal': $z-modal,
+    'popover': $z-popover,
+    'tooltip': $z-tooltip
+  );
+
+  @return map-get($layers, $layer);
+}
+
+// Border radius function
+@function border-radius($size) {
+  $radii: (
+    'sm': $border-radius-sm,
+    'base': $border-radius-base,
+    'md': $border-radius-md,
+    'lg': $border-radius-lg,
+    'xl': $border-radius-xl,
+    'full': $border-radius-full
+  );
+
+  @return map-get($radii, $size);
+}
+
+// Shadow function
+@function shadow($size) {
+  $shadows: (
+    'sm': $shadow-sm,
+    'base': $shadow-base,
+    'md': $shadow-md,
+    'lg': $shadow-lg,
+    'xl': $shadow-xl
+  );
+
+  @return map-get($shadows, $size);
+}
+
+// Transition function
+@function transition($speed) {
+  $transitions: (
+    'fast': $transition-fast,
+    'base': $transition-base,
+    'slow': $transition-slow
+  );
+
+  @return map-get($transitions, $speed);
+}

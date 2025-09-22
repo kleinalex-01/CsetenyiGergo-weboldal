@@ -1,0 +1,38 @@
+// ==========================================================================
+// NAVIGATION LAYOUT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/placeholders' as *;
+
+.nav {
+  &__list {
+    @extend %list-reset;
+    @extend %flex-center;
+    gap: $spacing-lg;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__link {
+    color: $text-primary;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-base;
+    transition: all $transition-base;
+
+    &:hover,
+    &:focus {
+      color: $primary-color;
+      background-color: $bg-accent;
+    }
+
+    &.active {
+      color: $primary-color;
+      background-color: $bg-accent;
+    }
+  }
+}

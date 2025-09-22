@@ -1,0 +1,31 @@
+// ==========================================================================
+// ABOUT PAGE
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.about {
+  padding: $spacing-4xl 0;
+
+  &__hero {
+    text-align: center;
+    margin-bottom: $spacing-4xl;
+  }
+
+  &__title {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-lg;
+
+    @include mobile {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}

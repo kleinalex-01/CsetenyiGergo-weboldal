@@ -1,0 +1,69 @@
+// ==========================================================================
+// CARD COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/placeholders' as *;
+
+.card {
+  @extend %card-base;
+
+  &__header {
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid $light-gray;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin: $spacing-xs 0 0 0;
+  }
+
+  &__body {
+    flex: 1;
+  }
+
+  &__content {
+    margin-bottom: $spacing-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__footer {
+    padding-top: $spacing-md;
+    border-top: 1px solid $light-gray;
+    margin-top: $spacing-md;
+    @extend %flex-between;
+  }
+
+  &__actions {
+    @extend %flex-center;
+    gap: $spacing-sm;
+  }
+
+  // Card variants
+  &--elevated {
+    box-shadow: $shadow-lg;
+  }
+
+  &--outlined {
+    box-shadow: none;
+    border: 1px solid $light-gray;
+  }
+
+  &--accent {
+    background-color: $bg-accent;
+    border: 1px solid alpha($primary-color, 0.2);
+  }
+}
