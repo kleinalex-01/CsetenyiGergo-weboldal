@@ -244,9 +244,168 @@
     margin-bottom: $spacing-md;
   }
 
-  &__feature-description {
+  &__services {
+    padding: $spacing-4xl 0;
+    background-color: $bg-secondary;
+  }
+
+  &__services-title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    text-align: center;
+    margin-bottom: $spacing-md;
+
+    @include mobile {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__services-subtitle {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+    line-height: $line-height-relaxed;
+
+    @include mobile {
+      font-size: $font-size-base;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__services-link {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $secondary-color;
+      text-decoration: underline;
+    }
+  }
+
+  &__services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: $spacing-xl;
+    margin-top: $spacing-2xl;
+  }
+
+  &__service-card {
+    background-color: $white;
+    border-radius: $border-radius-lg;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    box-shadow: $shadow-base, 0 0 20px rgba(34, 197, 94, 0.2);
+    overflow: hidden;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: $shadow-lg, 0 0 40px rgba(34, 197, 94, 0.4);
+    }
+  }
+
+  &__service-carousel {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    @include mobile {
+      height: 200px;
+    }
+  }
+
+  &__service-carousel-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__service-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  &__service-indicators {
+    position: absolute;
+    bottom: $spacing-md;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  &__service-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: $white;
+      border-color: $white;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &__service-icon {
+    font-size: $font-size-4xl;
+    text-align: center;
+    margin-bottom: $spacing-md;
+  }
+
+  &__service-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+    text-align: center;
+  }
+
+  &__service-description {
     color: $text-secondary;
     line-height: $line-height-relaxed;
+    text-align: center;
+    margin-bottom: $spacing-md;
+  }
+
+  &__service-benefits {
+    list-style: none;
+    padding: 0 $spacing-md;
+    margin: $spacing-md 0;
+
+    li {
+      position: relative;
+      padding-left: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: $primary-color;
+        font-weight: bold;
+      }
+    }
   }
 }
 
