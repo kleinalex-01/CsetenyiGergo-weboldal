@@ -9,44 +9,199 @@
 
 .home {
   &__hero {
-    background: linear-gradient(135deg, $bg-accent 0%, $white 50%, alpha($primary-color, 0.1) 100%);
-    padding: $spacing-4xl 0;
-    text-align: center;
-  }
+    min-height: 100vh;
+    background: linear-gradient(135deg, $bg-primary 0%, $bg-accent 100%);
+    position: relative;
+    overflow: hidden;
 
-  &__title {
-    font-size: $font-size-5xl;
-    font-weight: $font-weight-bold;
-    color: $text-primary;
-    margin-bottom: $spacing-lg;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-
-    @include mobile {
-      font-size: $font-size-4xl;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle, rgba(128, 128, 128, 0.3) 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: floatDots 10s linear infinite;
+      pointer-events: none;
+      z-index: 0;
     }
-  }
 
-  &__subtitle {
-    font-size: $font-size-xl;
-    color: $text-secondary;
-    margin-bottom: $spacing-2xl;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    &-container {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      min-height: 100vh;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 $spacing-xl;
+      gap: $spacing-2xl;
+      position: relative;
+      z-index: 1;
 
-    @include mobile {
-      font-size: $font-size-lg;
+      @include mobile {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: $spacing-xl;
+        padding: $spacing-xl;
+        min-height: auto;
+      }
     }
-  }
 
-  &__cta {
-    @extend %flex-center;
-    gap: $spacing-md;
+    &-content {
+      text-align: left;
+      max-width: 500px;
 
-    @include mobile {
+      @include mobile {
+        text-align: center;
+        order: 1;
+      }
+    }
+
+    &-title {
+      font-size: $font-size-5xl;
+      font-weight: $font-weight-bold;
+      color: $text-primary;
+      margin-bottom: $spacing-lg;
+      line-height: 1.1;
+
+      @include mobile {
+        font-size: $font-size-3xl;
+      }
+    }
+
+    &-subtitle {
+      font-size: $font-size-xl;
+      color: $text-secondary;
+      margin-bottom: $spacing-2xl;
+      line-height: 1.6;
+
+      @include mobile {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-xl;
+      }
+    }
+
+    &-cta {
+      display: flex;
+      gap: $spacing-lg;
+      align-items: center;
+
+      @include mobile {
+        flex-direction: column;
+        gap: $spacing-md;
+      }
+    }
+
+    &-separator {
+      display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-md;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        background: linear-gradient(to bottom, transparent 0%, $primary-color 20%, $primary-color 80%, transparent 100%);
+        transform: translateX(-50%);
+      }
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &-separator-icon {
+      font-size: $font-size-2xl;
+      color: $primary-color;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 2px 4px rgba(34, 197, 94, 0.3));
+
+      @for $i from 1 through 8 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.2}s;
+        }
+      }
+    }
+
+    &-carousel {
+      position: relative;
+      border-radius: $border-radius-xl;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+
+      @include mobile {
+        order: 2;
+        max-width: 100%;
+      }
+    }
+
+    &-carousel-container {
+      position: relative;
+      height: 400px;
+      width: 100%;
+
+      @include mobile {
+        height: 250px;
+      }
+    }
+
+    &-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+
+      &.active {
+        opacity: 1;
+      }
+    }
+
+    &-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: $border-radius-xl;
+    }
+
+    &-indicators {
+      position: absolute;
+      bottom: $spacing-lg;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: $spacing-sm;
+    }
+
+    &-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.active {
+        background: $white;
+        border-color: $white;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
     }
   }
 
@@ -92,5 +247,23 @@
   &__feature-description {
     color: $text-secondary;
     line-height: $line-height-relaxed;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatDots {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 30px;
   }
 }
