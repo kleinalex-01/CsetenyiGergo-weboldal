@@ -3,36 +3,298 @@
 // ==========================================================================
 
 @use '../abstracts/variables' as *;
-@use '../abstracts/placeholders' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
 
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: $white;
-  border-bottom: 1px solid $light-gray;
-  z-index: z('fixed');
-  box-shadow: $shadow-sm;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,253,244,0.95) 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+  box-shadow: 0 2px 4px alpha($text-primary, 0.1);
+  z-index: z('header');
+  transition: all $transition-base;
 
-  &__container {
-    @extend %container;
-    @extend %flex-between;
-    padding: $spacing-md 0;
-  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md $spacing-xl;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
 
-  &__logo {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-bold;
-    color: $primary-color;
-    text-decoration: none;
+    &__brand {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
 
-    &:hover {
-      color: $secondary-color;
+      &-link {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        text-decoration: none;
+        color: inherit;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: inherit;
+        }
+      }
+
+      h1 {
+        margin: 0;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $primary-color;
+        font-family: $font-family-secondary;
+      }
+    }
+
+    &__logo {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      @include mobile {
+        height: 40px;
+      }
+    }
+
+    &__list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: $spacing-xl;
+
+      @include tablet {
+        gap: $spacing-lg;
+      }
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &__item {
+      @include mobile {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid $light-gray;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    &__link {
+      text-decoration: none;
+      color: $text-primary;
+      font-weight: 500;
+      font-size: $font-size-base;
+      letter-spacing: 0.025em;
+      transition: all 0.2s ease;
+      padding: $spacing-sm 0;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $primary-color;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after,
+      &.active::after {
+        width: 100%;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      &:focus-visible {
+        outline: 2px solid $primary-color;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      &:hover,
+      &:focus {
+        color: $primary-color;
+        outline: none;
+      }
+
+      &.active {
+        color: $primary-color;
+        background-color: rgba(34, 197, 94, 0.1);
+        border-radius: 6px;
+        font-weight: 600;
+      }
+    }
+
+    &__mobile-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      z-index: z('dropdown');
+
+      &:hover {
+        background-color: alpha($primary-color, 0.1);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      @include mobile {
+        display: flex;
+      }
+    }
+
+    &__hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__hamburger-line {
+      width: 100%;
+      height: 3px;
+      background-color: $text-primary;
+      border-radius: 2px;
+      transform-origin: center;
+      transition: all 0.3s ease;
+    }
+
+    // Hamburger animation
+    &.open &__hamburger-line {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
     }
   }
+}
 
-  &__nav {
-    @extend %flex-center;
+// ==========================================================================
+// MOBILE MENU OVERLAY
+// ==========================================================================
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: z('modal');
+  pointer-events: none; // Allow clicks to pass through to close menu
+
+  .mobile-menu-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+
+    .mobile-menu__nav {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+
+    .mobile-menu__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      color: $primary-color !important;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateX(100px) scale(0.8);
+      animation: floatInFromRight 0.5s ease-out forwards;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+      // Remove text, just show icons
+      .mobile-menu__text {
+        display: none;
+      }
+
+      &:hover,
+      &:focus {
+        background: rgba(34, 197, 94, 0.1);
+        border-color: $primary-color;
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
+      }
+
+      &.active {
+        background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+        border-color: $primary-color;
+        color: $white !important;
+        box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+      }
+
+      &:focus-visible {
+        outline: 2px solid $primary-color;
+        outline-offset: 2px;
+      }
+    }
+  }
+}
+
+@keyframes floatInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px) scale(0.5) rotate(10deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(30px) scale(0.8) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0deg);
   }
 }

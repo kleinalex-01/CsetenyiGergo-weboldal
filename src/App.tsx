@@ -13,7 +13,7 @@ const App: React.FC = () => {
     <Router>
       <div className="app">
         <Header />
-        <main style={{ paddingTop: '0', minHeight: 'calc(100vh - 160px)' }}>
+        <main style={{ paddingTop: '80px', minHeight: 'calc(100vh - 160px)' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/szolgaltatasok" element={<Services />} />
