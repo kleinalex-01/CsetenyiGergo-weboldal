@@ -165,11 +165,11 @@ const Home: React.FC = () => {
                     alt={`Gépészeti munkálatok képe ${index + 1} - klíma, fűtés és hőszivattyú szolgáltatások`}
                     className="home__hero-image"
                     effect="blur"
-                    placeholderSrc={`https://via.placeholder.com/600x400/f0fdf4/22c55e?text=Loading...`}
+                    placeholderSrc="data:image/svg+xml,%3Csvg width='600' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23f0fdf4'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial,sans-serif' font-size='18' fill='%2322c55e' text-anchor='middle' dy='.3em'%3EBetöltés...%3C/text%3E%3C/svg%3E"
                     onError={(e) => {
                       // Fallback for missing images
                       const target = e.target as HTMLImageElement;
-                      target.src = `https://via.placeholder.com/600x400/22c55e/ffffff?text=Gépészeti+Szolgáltatás+${index + 1}`;
+                      target.src = "data:image/svg+xml,%3Csvg width='600' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%2322c55e'/%3E%3Ctext x='50%25' y='40%25' font-family='Arial,sans-serif' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EGépészeti Szolgáltatás%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial,sans-serif' font-size='16' fill='white' text-anchor='middle' dy='.3em'%3EKép " + (index + 1) + "%3C/text%3E%3C/svg%3E";
                     }}
                   />
                 </div>
@@ -313,7 +313,7 @@ const Home: React.FC = () => {
                           alt={`${service.title} szolgáltatás képe ${imageIndex + 1}`}
                           className="home__service-image"
                           effect="blur"
-                          placeholderSrc={`https://via.placeholder.com/400x300/f0fdf4/22c55e?text=Loading...`}
+                          placeholderSrc="data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23f0fdf4'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial,sans-serif' font-size='16' fill='%2322c55e' text-anchor='middle' dy='.3em'%3EBetöltés...%3C/text%3E%3C/svg%3E"
                         />
                       </div>
                     ))}
