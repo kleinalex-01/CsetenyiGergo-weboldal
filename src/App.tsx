@@ -12,16 +12,8 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="app">
-        <a href="#main-content" className="skip-link">
-          Ugrás a főtartalomhoz
-        </a>
         <Header />
-        <main 
-          id="main-content" 
-          role="main"
-          style={{ paddingTop: '80px', minHeight: 'calc(100vh - 160px)' }}
-          aria-label="Főtartalom"
-        >
+        <main style={{ paddingTop: '80px', minHeight: 'calc(100vh - 160px)' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/szolgaltatasok" element={<Services />} />

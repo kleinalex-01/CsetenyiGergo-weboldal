@@ -14,13 +14,6 @@ const Header: React.FC = () => {
     setIsMobileMenuOpen(false);
   };
 
-  // Handle keyboard navigation
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape' && isMobileMenuOpen) {
-      closeMobileMenu();
-    }
-  };
-
   const isActiveLink = (path: string) => {
     if (path === '/') {
       return location.pathname === '/';
@@ -37,34 +30,22 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="header" role="banner">
-        <nav className="nav" role="navigation" aria-label="Főnavigáció">
+      <header className="header">
+        <nav className="nav">
           <div className="nav__brand">
-            <Link 
-              to="/" 
-              className="nav__brand-link"
-              aria-label="Csetényi Gépészet főoldal"
-            >
-              <img 
-                src="/images/logo.jpg" 
-                alt="Csetényi Gépészet Logo - Klíma, Hőszivattyú, Épületgépészet" 
-                className="nav__logo" 
-              />
+            <Link to="/" className="nav__brand-link">
+              <img src="/images/logo.jpg" alt="Csetényi Gépészet Logo" className="nav__logo" />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <ul className="nav__list" role="menubar">
+          <ul className="nav__list">
             {navItems.map((item) => (
-              <li key={item.path} className="nav__item" role="none">
+              <li key={item.path} className="nav__item">
                 <Link
                   to={item.path}
                   className={`nav__link ${isActiveLink(item.path) ? 'active' : ''}`}
-                  role="menuitem"
-                  aria-current={isActiveLink(item.path) ? 'page' : undefined}
-                  aria-label={`${item.label} oldal`}
                 >
-                  <span aria-hidden="true">{item.icon}</span>
                   {item.label}
                 </Link>
               </li>
@@ -75,20 +56,14 @@ const Header: React.FC = () => {
           <button
             className={`nav__mobile-toggle ${isMobileMenuOpen ? 'open' : ''}`}
             onClick={toggleMobileMenu}
-            aria-label={isMobileMenuOpen ? 'Navigációs menü bezárása' : 'Navigációs menü megnyitása'}
+            aria-label={isMobileMenuOpen ? 'Menü bezárása' : 'Menü megnyitása'}
             aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-navigation-menu"
-            aria-haspopup="true"
-            type="button"
           >
-            <div className="nav__hamburger-icon" aria-hidden="true">
+            <div className="nav__hamburger-icon">
               <span className="nav__hamburger-line"></span>
               <span className="nav__hamburger-line"></span>
               <span className="nav__hamburger-line"></span>
             </div>
-            <span className="sr-only">
-              {isMobileMenuOpen ? 'Menü bezárása' : 'Menü megnyitása'}
-            </span>
           </button>
         </nav>
       </header>
@@ -103,8 +78,15 @@ const Header: React.FC = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={closeMobileMenu}
-            role="presentation"
-            aria-hidden="false"
+            style={{ 
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              zIndex: 998
+            }}
           >
             <motion.div
               className="mobile-menu-content"
@@ -112,20 +94,11 @@ const Header: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              style={{ zIndex: 999 }}
               onClick={(e) => e.stopPropagation()}
-              onKeyDown={handleKeyDown}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="mobile-menu-title"
             >
               {/* Navigation Links */}
-              <nav 
-                className="mobile-menu__nav" 
-                id="mobile-navigation-menu"
-                role="navigation"
-                aria-label="Mobil navigáció"
-              >
-                <h2 id="mobile-menu-title" className="sr-only">Navigációs menü</h2>
+              <nav className="mobile-menu__nav">
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.path}
@@ -133,18 +106,13 @@ const Header: React.FC = () => {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 30 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    role="none"
                   >
                     <Link
                       to={item.path}
                       className={`mobile-menu__link ${isActiveLink(item.path) ? 'active' : ''}`}
                       onClick={closeMobileMenu}
-                      aria-current={isActiveLink(item.path) ? 'page' : undefined}
-                      aria-label={`${item.label} oldalra navigálás és menü bezárása`}
-                      role="menuitem"
-                      tabIndex={isMobileMenuOpen ? 0 : -1}
                     >
-                      <span className="mobile-menu__icon" aria-hidden="true">{item.icon}</span>
+                      <span className="mobile-menu__icon">{item.icon}</span>
                       <span className="mobile-menu__text">{item.label}</span>
                     </Link>
                   </motion.div>
