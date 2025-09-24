@@ -75,34 +75,70 @@ const Home: React.FC = () => {
           </Parallax>
           <div className="home__hero-container">
           {/* Left Side - Content */}
-          <div className="home__hero-content">
-            <h1 className="home__hero-title">
+          <motion.div 
+            className="home__hero-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, staggerChildren: 0.2 }}
+          >
+            <motion.h1 
+              className="home__hero-title"
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
               Klíma, Hőszivattyú, Épületgépészet
-            </h1>
-            <p className="home__hero-subtitle">
+            </motion.h1>
+            <motion.p 
+              className="home__hero-subtitle"
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
               Professzionális megoldások önnek és otthonának.
-            </p>
-            <div className="home__hero-cta">
+            </motion.p>
+            <motion.div 
+              className="home__hero-cta"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
               <a href="tel:+36301234567" className="btn btn--primary btn--lg">
                 <span className="btn-icon">📞</span> Hívjon most!
               </a>
               <a href="#contact" className="btn btn--white btn--lg">
                 <span className="btn-icon">✉️</span> Írjon nekünk!
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Vertical Separator */}
-          <div className="home__hero-separator">
+          <motion.div 
+            className="home__hero-separator"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
             {toolIcons.map((icon, index) => (
-              <div key={index} className="home__hero-separator-icon">
+              <motion.div 
+                key={index} 
+                className="home__hero-separator-icon"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+              >
                 {icon}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Right Side - Image Carousel */}
-          <div className="home__hero-carousel">
+          <motion.div 
+            className="home__hero-carousel"
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <div className="home__hero-carousel-container">
               {carouselImages.map((image, index) => (
                 <div
@@ -136,7 +172,7 @@ const Home: React.FC = () => {
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -211,10 +247,24 @@ const Home: React.FC = () => {
           <div className="home__services-background"></div>
         </Parallax>
         <div className="container">
-          <h2 className="home__services-title">Vállalkozásunk főbb szolgáltatásai</h2>
-          <p className="home__services-subtitle">
+          <motion.h2 
+            className="home__services-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Vállalkozásunk főbb szolgáltatásai
+          </motion.h2>
+          <motion.p 
+            className="home__services-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             Itt találod munkásságunk dióhéjban. További információkért, nézd meg a <a href="#services" className="home__services-link">Szolgáltatások</a> oldalt.
-          </p>
+          </motion.p>
           <motion.div
             className="home__services-grid"
             initial={{ opacity: 0, y: 50 }}
