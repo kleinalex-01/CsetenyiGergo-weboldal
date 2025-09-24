@@ -108,12 +108,14 @@
 
       @include mobile {
         flex-direction: column;
-        gap: $spacing-md;
+        gap: $spacing-sm;
         width: 100%;
 
         .btn {
           width: 100%;
-          max-width: 280px;
+          max-width: 220px;
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
         }
       }
 

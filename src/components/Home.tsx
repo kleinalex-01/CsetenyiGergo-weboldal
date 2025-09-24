@@ -67,10 +67,10 @@ const Home: React.FC = () => {
 
   return (
     <ParallaxProvider>
-      <section id="home" className="home">
+      <div id="home" className="home">
         {/* Hero Section */}
-        <section className="home__hero">
-          <Parallax speed={-20} className="home__hero-parallax-bg">
+        <section className="home__hero" role="banner" aria-labelledby="hero-heading">
+          <Parallax speed={-20} className="home__hero-parallax-bg" role="presentation">
             <div className="home__hero-background"></div>
           </Parallax>
           <div className="home__hero-container">
@@ -82,17 +82,18 @@ const Home: React.FC = () => {
             transition={{ duration: 0.8, staggerChildren: 0.2 }}
           >
             <motion.h1 
+              id="hero-heading"
               className="home__hero-title"
-              initial={{ opacity: 0, x: -60 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
               Klíma, Hőszivattyú, Épületgépészet
             </motion.h1>
             <motion.p 
               className="home__hero-subtitle"
-              initial={{ opacity: 0, x: -60 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               Professzionális megoldások önnek és otthonának.
@@ -102,12 +103,22 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
+              role="group"
+              aria-label="Kapcsolatfelvételi lehetőségek"
             >
-              <a href="tel:+36301234567" className="btn btn--primary btn--lg">
-                <span className="btn-icon">📞</span> Hívjon most!
+              <a 
+                href="tel:+36301234567" 
+                className="btn btn--primary btn--lg"
+                aria-label="Hívjon fel minket most a +36 30 123 4567 telefonszámon"
+              >
+                <span className="btn-icon" aria-hidden="true">📞</span> Hívjon most!
               </a>
-              <a href="#contact" className="btn btn--white btn--lg">
-                <span className="btn-icon">✉️</span> Írjon nekünk!
+              <a 
+                href="#contact" 
+                className="btn btn--white btn--lg"
+                aria-label="Ugrás a kapcsolat szekcióhoz"
+              >
+                <span className="btn-icon" aria-hidden="true">✉️</span> Írjon nekünk!
               </a>
             </motion.div>
           </motion.div>
@@ -115,15 +126,15 @@ const Home: React.FC = () => {
           {/* Vertical Separator */}
           <motion.div 
             className="home__hero-separator"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
           >
             {toolIcons.map((icon, index) => (
               <motion.div 
                 key={index} 
                 className="home__hero-separator-icon"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
               >
@@ -135,19 +146,23 @@ const Home: React.FC = () => {
           {/* Right Side - Image Carousel */}
           <motion.div 
             className="home__hero-carousel"
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            role="region"
+            aria-label="Képgaléria a gépészeti szolgáltatásokról"
           >
             <div className="home__hero-carousel-container">
               {carouselImages.map((image, index) => (
                 <div
                   key={index}
                   className={`home__hero-slide ${index === currentSlide ? 'active' : ''}`}
+                  role="img"
+                  aria-hidden={index !== currentSlide}
                 >
                   <LazyLoadImage
                     src={image}
-                    alt={`Hero image ${index + 1}`}
+                    alt={`Gépészeti munkálatok képe ${index + 1} - klíma, fűtés és hőszivattyú szolgáltatások`}
                     className="home__hero-image"
                     effect="blur"
                     placeholderSrc={`https://via.placeholder.com/600x400/f0fdf4/22c55e?text=Loading...`}
@@ -161,25 +176,16 @@ const Home: React.FC = () => {
               ))}
             </div>
 
-            {/* Carousel Indicators */}
-            <div className="home__hero-indicators">
-              {carouselImages.map((_, index) => (
-                <button
-                  key={index}
-                  className={`home__hero-indicator ${index === currentSlide ? 'active' : ''}`}
-                  onClick={() => setCurrentSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
+
           </motion.div>
         </div>
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="home__why-choose">
+      <section className="home__why-choose" aria-labelledby="why-choose-heading">
         <div className="container">
           <motion.h2
+            id="why-choose-heading"
             className="home__why-choose-title"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -188,12 +194,14 @@ const Home: React.FC = () => {
           >
             Miért válassz minket?
           </motion.h2>
-          <motion.div
+          <motion.ul
             className="home__why-choose-grid"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
+            role="list"
+            aria-label="Előnyeink listája"
           >
             {[
               {
@@ -237,17 +245,18 @@ const Home: React.FC = () => {
                 </p>
               </motion.li>
             ))}
-          </motion.div>
+          </motion.ul>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="home__services">
-        <Parallax speed={-15} className="home__services-parallax-bg">
+      <section className="home__services" aria-labelledby="services-heading">
+        <Parallax speed={-15} className="home__services-parallax-bg" role="presentation">
           <div className="home__services-background"></div>
         </Parallax>
         <div className="container">
           <motion.h2 
+            id="services-heading"
             className="home__services-title"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -271,9 +280,11 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, staggerChildren: 0.2 }}
             viewport={{ once: true }}
+            role="list"
+            aria-label="Szolgáltatásaink listája"
           >
             {services.map((service, serviceIndex) => (
-              <motion.div
+              <motion.article
                 key={serviceIndex}
                 className="home__service-card"
                 initial={{ opacity: 0, y: 30 }}
@@ -281,17 +292,25 @@ const Home: React.FC = () => {
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ duration: 0.6, delay: serviceIndex * 0.2 }}
                 viewport={{ once: true }}
+                role="listitem"
+                aria-labelledby={`service-title-${serviceIndex}`}
               >
-                <div className="home__service-carousel">
+                <div 
+                  className="home__service-carousel"
+                  role="region"
+                  aria-label={`${service.title} képgaléria`}
+                >
                   <div className="home__service-carousel-container">
                     {service.images.map((image, imageIndex) => (
                       <div
                         key={imageIndex}
                         className={`home__service-slide ${imageIndex === serviceSlides[serviceIndex] ? 'active' : ''}`}
+                        role="img"
+                        aria-hidden={imageIndex !== serviceSlides[serviceIndex]}
                       >
                         <LazyLoadImage
                           src={image}
-                          alt={`${service.title} ${imageIndex + 1}`}
+                          alt={`${service.title} szolgáltatás képe ${imageIndex + 1}`}
                           className="home__service-image"
                           effect="blur"
                           placeholderSrc={`https://via.placeholder.com/400x300/f0fdf4/22c55e?text=Loading...`}
@@ -299,34 +318,25 @@ const Home: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="home__service-indicators">
-                    {service.images.map((_, imageIndex) => (
-                      <button
-                        key={imageIndex}
-                        className={`home__service-indicator ${imageIndex === serviceSlides[serviceIndex] ? 'active' : ''}`}
-                        onClick={() => {
-                          const newSlides = [...serviceSlides];
-                          newSlides[serviceIndex] = imageIndex;
-                          setServiceSlides(newSlides);
-                        }}
-                        aria-label={`View image ${imageIndex + 1} for ${service.title}`}
-                      />
-                    ))}
-                  </div>
+
                 </div>
                 <div className="home__service-content">
-                  <h3 className="home__service-title">{service.title}</h3>
+                  <h3 id={`service-title-${serviceIndex}`} className="home__service-title">{service.title}</h3>
                   <p className="home__service-description">{service.description}</p>
-                  <a href="#contact" className="home__service-cta btn btn--primary btn--sm">
+                  <a 
+                    href="#contact" 
+                    className="home__service-cta btn btn--primary btn--sm"
+                    aria-label={`Bővebb információ a ${service.title} szolgáltatásról`}
+                  >
                     Bővebben
                   </a>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </motion.div>
         </div>
       </section>
-    </section>
+    </div>
     </ParallaxProvider>
   );
 };
