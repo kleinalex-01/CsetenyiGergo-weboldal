@@ -122,17 +122,39 @@
 
 @mixin button-primary {
   @include button-base;
-  background-color: $primary-color;
+  background: linear-gradient(135deg, #0d4429 0%, #1a4d3a 50%, #0a2e1f 100%);
   color: $white;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 4px 12px rgba(13, 68, 41, 0.3);
+  font-weight: $font-weight-semibold;
+  position: relative;
+  overflow: hidden;
+
+  // Add subtle shimmer effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+  }
 
   &:hover:not(:disabled) {
-    background-color: $secondary-color;
-    transform: translateY(-1px);
-    box-shadow: $shadow-md;
+    background: linear-gradient(135deg, #1a5a37 0%, #2a6d5a 50%, #0f3525 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(13, 68, 41, 0.4);
+
+    &::before {
+      left: 100%;
+    }
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 68, 41, 0.3);
   }
 }
 

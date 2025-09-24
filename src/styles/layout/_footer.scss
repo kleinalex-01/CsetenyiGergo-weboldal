@@ -12,7 +12,7 @@
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite, breathe 4s ease-in-out infinite;
   color: $white;
-  padding: $spacing-3xl 0 $spacing-xl 0;
+  padding: $spacing-2xl 0 $spacing-xl 0;
   margin-top: auto;
 
   &__container {
@@ -80,14 +80,15 @@
   &__action-button {
     display: inline-flex;
     align-items: center;
-    gap: $spacing-xs;
-    padding: $spacing-sm $spacing-md;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
     background-color: alpha($white, 0.1);
     color: $white;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 50%;
     font-weight: $font-weight-medium;
-    font-size: $font-size-sm;
+    font-size: $font-size-lg;
     transition: all $transition-base;
     border: 2px solid transparent;
     animation: slideInUp 0.6s ease-out both;
@@ -128,23 +129,21 @@
     }
 
     @include mobile {
-      padding: $spacing-xs $spacing-sm;
-      font-size: $font-size-xs;
-      gap: $spacing-xs;
+      width: 45px;
+      height: 45px;
+      font-size: $font-size-base;
     }
 
     @include mobile-l {
-      padding: $spacing-sm $spacing-md;
-      font-size: $font-size-sm;
-      gap: $spacing-xs;
-      min-width: auto;
+      width: 48px;
+      height: 48px;
+      font-size: $font-size-lg;
     }
 
     @include tablet {
-      padding: $spacing-md $spacing-lg;
-      font-size: $font-size-base;
-      gap: $spacing-sm;
-      min-width: 140px;
+      width: 55px;
+      height: 55px;
+      font-size: $font-size-xl;
     }
 
     @include laptop {
@@ -220,8 +219,8 @@
   }
 
   &__address {
-    margin-top: $spacing-lg;
     text-align: center;
+    margin-bottom: $spacing-xl;
 
     h4 {
       color: $primary-color;

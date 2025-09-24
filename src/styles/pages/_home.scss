@@ -11,21 +11,32 @@
   &__hero {
     min-height: 100vh;
     background: linear-gradient(135deg, $bg-primary 0%, $bg-accent 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
     position: relative;
     overflow: hidden;
 
-    &::before {
-      content: '';
+    // Parallax background container
+    &-parallax-bg {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: radial-gradient(circle, rgba(128, 128, 128, 0.3) 1px, transparent 1px);
-      background-size: 30px 30px;
-      animation: floatDots 10s linear infinite;
-      pointer-events: none;
       z-index: 0;
+    }
+
+    // Background element for parallax
+    &-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle, rgba(128, 128, 128, 0.35) 1.5px, transparent 1.5px);
+      background-size: 25px 25px;
+      animation: floatDots 8s linear infinite;
+      pointer-events: none;
     }
 
     &-container {
@@ -44,8 +55,10 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
         gap: $spacing-xl;
-        padding: $spacing-xl;
+        padding: $spacing-xl $spacing-md;
         min-height: auto;
+        justify-items: center;
+        text-align: center;
       }
     }
 
@@ -56,6 +69,7 @@
       @include mobile {
         text-align: center;
         order: 1;
+        max-width: 100%;
       }
     }
 
@@ -87,10 +101,35 @@
       display: flex;
       gap: $spacing-lg;
       align-items: center;
+      margin-top: $spacing-xl;
+      
+      // Add subtle animation on mount
+      animation: fadeInUp 0.8s ease 0.6s both;
 
       @include mobile {
         flex-direction: column;
         gap: $spacing-md;
+        width: 100%;
+
+        .btn {
+          width: 100%;
+          max-width: 280px;
+        }
+      }
+
+      .btn {
+        transition: all 0.3s ease;
+        min-width: 180px;
+
+        @include mobile {
+          min-width: auto;
+        }
+
+        // Icon styling
+        .btn-icon {
+          display: inline-block;
+          margin-right: $spacing-xs;
+        }
       }
     }
 
@@ -135,13 +174,19 @@
       position: relative;
       border-radius: $border-radius-xl;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 30px rgba(26, 77, 58, 0.3);
       max-width: 600px;
       width: 100%;
+      transition: all 0.4s ease;
 
       @include mobile {
         order: 2;
         max-width: 100%;
+      }
+
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 0 50px rgba(26, 77, 58, 0.5);
       }
     }
 
@@ -205,6 +250,122 @@
     }
   }
 
+  // ==========================================================================
+  // WHY CHOOSE US SECTION
+  // ==========================================================================
+
+  &__why-choose {
+    padding: $spacing-4xl 0;
+    background: linear-gradient(135deg, #1a4d3a 0%, #0f2920 100%);
+    color: $white;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: subtleFloat 15s linear infinite;
+      pointer-events: none;
+    }
+  }
+
+  &__why-choose-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: $white;
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+    position: relative;
+    z-index: 1;
+
+    @include mobile {
+      font-size: clamp(1.75rem, 6vw, 2.25rem);
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-xl;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+    position: relative;
+    z-index: 1;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+      padding: 0 $spacing-sm;
+    }
+  }
+
+  &__why-choose-card {
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: $border-radius-xl;
+    padding: $spacing-xl;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    list-style: none;
+
+    @include mobile {
+      padding: $spacing-lg;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+      border-color: rgba(34, 197, 94, 0.4);
+      box-shadow: 0 12px 40px rgba(34, 197, 94, 0.2);
+    }
+  }
+
+  &__why-choose-card-icon {
+    font-size: 3rem;
+    margin-bottom: $spacing-md;
+    display: inline-block;
+    transition: transform 0.3s ease;
+
+    @include mobile {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__why-choose-card-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $white;
+    margin-bottom: $spacing-sm;
+    line-height: $line-height-tight;
+
+    @include mobile {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__why-choose-card-description {
+    font-size: $font-size-base;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: $line-height-relaxed;
+    margin: 0;
+
+    @include mobile {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__why-choose-card:hover &__why-choose-card-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
   &__features {
     padding: $spacing-4xl 0;
     background-color: $bg-secondary;
@@ -246,7 +407,40 @@
 
   &__services {
     padding: $spacing-4xl 0;
-    background-color: $bg-secondary;
+    background: linear-gradient(135deg, $bg-primary 0%, $bg-accent 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+
+    // Parallax background container
+    &-parallax-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+
+    // Background element for parallax
+    &-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle, rgba(128, 128, 128, 0.4) 1.5px, transparent 1.5px);
+      background-size: 25px 25px;
+      animation: floatDots 8s linear infinite;
+      pointer-events: none;
+    }
+
+    // Ensure content is above the parallax background
+    .container {
+      position: relative;
+      z-index: 1;
+    }
   }
 
   &__services-title {
@@ -271,6 +465,7 @@
     @include mobile {
       font-size: $font-size-base;
       margin-bottom: $spacing-xl;
+      padding: 0 $spacing-md;
     }
   }
 
@@ -291,26 +486,57 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: $spacing-xl;
     margin-top: $spacing-2xl;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+      padding: 0 $spacing-md;
+      justify-items: center;
+    }
   }
 
   &__service-card {
-    background-color: $white;
-    border-radius: $border-radius-lg;
-    border: 1px solid rgba(34, 197, 94, 0.2);
-    box-shadow: $shadow-base, 0 0 20px rgba(34, 197, 94, 0.2);
+    background: $white;
+    border-radius: $border-radius-xl;
+    box-shadow: 0 8px 30px rgba(13, 68, 41, 0.3);
     overflow: hidden;
-    transition: transform $transition-base, box-shadow $transition-base;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    color: $text-primary;
+    display: flex;
+    flex-direction: column;
 
     &:hover {
-      transform: translateY(-8px);
-      box-shadow: $shadow-lg, 0 0 40px rgba(34, 197, 94, 0.4);
+      transform: translateY(-12px);
+      box-shadow: 0 20px 50px rgba(13, 68, 41, 0.4);
+      
+      .home__service-carousel {
+        transform: scale(1.05);
+      }
+      
+      .home__service-title {
+        color: #1a4d3a;
+      }
+      
+      .home__service-cta {
+        background: linear-gradient(135deg, #2a6d5a 0%, #1a5a37 100%);
+        color: $white;
+        transform: translateY(-2px);
+      }
+    }
+
+    @include mobile {
+      width: 100%;
+      max-width: 100%;
     }
   }
 
   &__service-carousel {
     position: relative;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+    transition: transform 0.4s ease;
 
     @include mobile {
       height: 200px;
@@ -369,21 +595,64 @@
     font-size: $font-size-4xl;
     text-align: center;
     margin-bottom: $spacing-md;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &__service-content {
+    padding: $spacing-xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+
+    @include mobile {
+      padding: $spacing-lg;
+    }
   }
 
   &__service-title {
     font-size: $font-size-xl;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     color: $text-primary;
     margin-bottom: $spacing-md;
     text-align: center;
+    transition: color 0.3s ease;
+
+    @include mobile {
+      font-size: $font-size-lg;
+    }
   }
 
   &__service-description {
     color: $text-secondary;
     line-height: $line-height-relaxed;
     text-align: center;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-xl;
+    font-size: $font-size-base;
+    flex-grow: 1;
+
+    @include mobile {
+      font-size: $font-size-sm;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__service-cta {
+    background: linear-gradient(135deg, #1a4d3a 0%, #0d4429 100%);
+    color: #ffffff !important;
+    border: none;
+    transition: all 0.3s ease;
+    font-weight: $font-weight-medium;
+    
+    &:hover {
+      background: linear-gradient(135deg, #2a6d5a 0%, #1a5a37 100%);
+      color: #ffffff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
+    }
   }
 
   &__service-benefits {
@@ -423,6 +692,44 @@
     background-position: 0 0;
   }
   100% {
-    background-position: 30px 30px;
+    background-position: 25px 25px;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes subtleFloat {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

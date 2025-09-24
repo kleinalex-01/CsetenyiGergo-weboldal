@@ -1,0 +1,137 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Loading skeleton styles
+.loading-skeleton {
+  background: linear-gradient(90deg, 
+    rgba(240, 253, 244, 0.2) 25%, 
+    rgba(34, 197, 94, 0.1) 50%, 
+    rgba(240, 253, 244, 0.2) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
+  
+  &__image {
+    width: 100%;
+    height: 200px;
+    background: inherit;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  &__content {
+    padding: 1rem;
+  }
+  
+  &__icon {
+    width: 40px;
+    height: 40px;
+    background: inherit;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  &__title {
+    width: 80%;
+    height: 24px;
+    background: inherit;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  &__list-item {
+    width: 90%;
+    height: 16px;
+    background: inherit;
+    border-radius: 4px;
+    
+    &:nth-child(even) {
+      width: 75%;
+    }
+  }
+  
+  &__indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  &__dot {
+    width: 12px;
+    height: 12px;
+    background: inherit;
+    border-radius: 50%;
+  }
+  
+  // Variants
+  &--carousel {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    
+    .loading-skeleton__image {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  }
+  
+  &--service-card {
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &--image {
+    width: 100%;
+    height: 200px;
+  }
+  
+  &--text {
+    width: 100%;
+    height: 20px;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Responsive adjustments
+@include tablet {
+  .loading-skeleton {
+    &--carousel {
+      height: 250px;
+    }
+    
+    &--service-card {
+      min-height: 350px;
+    }
+  }
+}
+
+@include mobile {
+  .loading-skeleton {
+    &--carousel {
+      height: 200px;
+    }
+    
+    &--service-card {
+      min-height: 300px;
+    }
+  }
+}
