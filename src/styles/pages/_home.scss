@@ -83,6 +83,34 @@
       @include mobile {
         font-size: $font-size-3xl;
       }
+
+      // Style for individual words using spans
+      .hero-title-word {
+        &--klimaepuletepeszet {
+          color: $text-primary;
+        }
+
+        &--hoszivattyuepuletgepeszet {
+          position: relative;
+          color: $text-primary;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: darken($primary-color, 15%);
+            border-radius: 2px;
+
+            @include mobile {
+              bottom: -6px;
+              height: 3px;
+            }
+          }
+        }
+      }
     }
 
     &-subtitle {

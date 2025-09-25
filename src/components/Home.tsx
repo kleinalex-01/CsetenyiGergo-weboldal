@@ -87,7 +87,8 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Klíma, Hőszivattyú, Épületgépészet
+              <span className="hero-title-word hero-title-word--klimaepuletepeszet">Klíma, Hőszivattyú, </span>
+              <span className="hero-title-word hero-title-word--hoszivattyuepuletgepeszet">Épületgépészet</span>
             </motion.h1>
             <motion.p 
               className="home__hero-subtitle"
