@@ -106,7 +106,7 @@ const Home: React.FC = () => {
               <a href="tel:+36301234567" className="btn btn--primary btn--lg">
                 <span className="btn-icon">📞</span> Hívjon most!
               </a>
-              <a href="#contact" className="btn btn--white btn--lg">
+              <a href="mailto:csetkagepeszet@gmail.com" className="btn btn--white btn--lg">
                 <span className="btn-icon">✉️</span> Írjon nekünk!
               </a>
             </motion.div>
