@@ -7,7 +7,7 @@
   publish = "dist"
   
   # Default build command
-  command = "npm run build"
+  command = "npm ci --legacy-peer-deps && npm run build"
 
 # Build environment variables
 [build.environment]
