@@ -1,7 +1,31 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaFacebookF } from 'react-icons/fa';
+import Breadcrumb from './Breadcrumb';
 
 const Footer: React.FC = () => {
+  const location = useLocation();
+  
+  // Generate breadcrumb items based on current route
+  const getBreadcrumbItems = () => {
+    const pathToName: { [key: string]: string } = {
+      '/': 'Főoldal',
+      '/szolgaltatasok': 'Szolgáltatások',
+      '/galeria': 'Galéria',
+      '/kapcsolat': 'Kapcsolat'
+    };
+
+    const items = [{ label: 'Főoldal', href: '/' }];
+    
+    if (location.pathname !== '/') {
+      items.push({ 
+        label: pathToName[location.pathname] || 'Oldal' 
+      });
+    }
+    
+    return items;
+  };
+
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -62,6 +86,10 @@ const Footer: React.FC = () => {
 
         {/* Footer bottom */}
         <div className="footer__bottom">
+          <Breadcrumb 
+            items={getBreadcrumbItems()} 
+            className="footer__breadcrumb" 
+          />
           <p className="footer__copyright">
             © 2025 - Klein Alex
           </p>

@@ -277,3 +277,49 @@
     transform: translateY(0);
   }
 }
+
+// Footer Breadcrumb Styles
+.footer__breadcrumb {
+  margin-bottom: $spacing-md;
+}
+
+.breadcrumb {
+  &__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: $font-size-sm;
+    color: rgba($white, 0.8);
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: '>';
+      margin: 0 $spacing-xs;
+      color: rgba($white, 0.6);
+      font-size: 0.8em;
+    }
+  }
+
+  &__link {
+    color: rgba($white, 0.9);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+
+  &__current {
+    color: $white;
+    font-weight: 500;
+  }
+}

@@ -92,20 +92,28 @@
 
         &--hoszivattyuepuletgepeszet {
           position: relative;
-          color: $text-primary;
+          background: linear-gradient(45deg, $primary-color, lighten($primary-color, 15%), $secondary-color, $primary-color);
+          background-size: 300% 300%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: $primary-color; // fallback for browsers that don't support background-clip
+          animation: shimmer 4s ease-in-out infinite;
 
           &::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -2px;
             left: 0;
             right: 0;
             height: 4px;
-            background: darken($primary-color, 15%);
+            background: linear-gradient(45deg, $primary-color, lighten($primary-color, 15%), $secondary-color, $primary-color);
+            background-size: 300% 300%;
             border-radius: 2px;
+            animation: shimmer 4s ease-in-out infinite;
 
             @include mobile {
-              bottom: -6px;
+              bottom: -1px;
               height: 3px;
             }
           }
@@ -671,17 +679,17 @@
   }
 
   &__service-cta {
-    background: linear-gradient(135deg, #1a4d3a 0%, #0d4429 100%);
+    background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
     color: #ffffff !important;
     border: none;
     transition: all 0.3s ease;
     font-weight: $font-weight-medium;
     
     &:hover {
-      background: linear-gradient(135deg, #2a6d5a 0%, #1a5a37 100%);
+      background: linear-gradient(135deg, lighten($primary-color, 10%) 0%, $primary-color 100%);
       color: #ffffff !important;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
+      box-shadow: 0 4px 12px rgba($primary-color, 0.3);
     }
   }
 
@@ -761,5 +769,18 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+// Shimmer text animation
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

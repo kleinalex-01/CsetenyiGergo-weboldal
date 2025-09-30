@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // Sample images for each category (replace with actual image paths)
 const climateImages = [
@@ -24,20 +25,14 @@ const heatingImages = [
 const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'climate' | 'heating'>('climate');
 
-  const fadeInVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 }
-  };
-
-  const slideFromRight = {
-    hidden: { opacity: 0, x: 100 },
-    visible: { opacity: 1, x: 0 }
-  };
-
-  const slideFromLeft = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0 }
-  };
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 50,
+      easing: 'ease-out'
+    });
+  }, []);
 
   return (
     <ParallaxProvider>
@@ -51,28 +46,23 @@ const Gallery: React.FC = () => {
         
         <div className="container">
         {/* Header */}
-        <motion.div 
+        <div 
           className="gallery__header"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInVariants}
-          transition={{ duration: 0.8 }}
+          data-aos="fade-up"
+          data-aos-duration="800"
         >
           <h1 className="gallery__title">Galéria</h1>
           <p className="gallery__subtitle">
             Tekintse meg munkáinkat és projektjeinket képekben
           </p>
-        </motion.div>
+        </div>
 
         {/* Category Selector */}
-        <motion.div 
+        <div 
           className="gallery__category-selector"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInVariants}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-delay="200"
         >
           <button
             className={`gallery__category-btn ${activeCategory === 'climate' ? 'gallery__category-btn--active' : ''}`}
@@ -88,33 +78,20 @@ const Gallery: React.FC = () => {
             <span className="gallery__category-icon">🔥</span>
             Fűtésrendszerek, Épületgépészet
           </button>
-        </motion.div>
+        </div>
 
         {/* Image Gallery */}
         <div className="gallery__content">
           {activeCategory === 'climate' && (
-            <motion.div 
-              className="gallery__category-section"
-              initial="hidden"
-              animate="visible"
-              variants={fadeInVariants}
-              transition={{ duration: 0.6 }}
-            >
+            <div className="gallery__category-section">
               <div className="gallery__images">
                 {climateImages.map((image, index) => (
-                  <motion.div
+                  <div
                     key={image.id}
                     className="gallery__image-container"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    variants={index % 2 === 0 ? slideFromRight : slideFromLeft}
-                    transition={{ 
-                      duration: 0.8, 
-                      delay: (index % 4) * 0.1,
-                      ease: "easeOut"
-                    }}
-                    whileHover={{ scale: 1.02, y: -5 }}
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                    data-aos-delay={`${(index % 4) * 100}`}
                   >
                     <div className="gallery__image-wrapper">
                       <img 
@@ -130,35 +107,22 @@ const Gallery: React.FC = () => {
                         <h3 className="gallery__image-title">{image.title}</h3>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           )}
 
           {activeCategory === 'heating' && (
-            <motion.div 
-              className="gallery__category-section"
-              initial="hidden"
-              animate="visible"
-              variants={fadeInVariants}
-              transition={{ duration: 0.6 }}
-            >
+            <div className="gallery__category-section">
               <div className="gallery__images">
                 {heatingImages.map((image, index) => (
-                  <motion.div
+                  <div
                     key={image.id}
                     className="gallery__image-container"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    variants={index % 2 === 0 ? slideFromRight : slideFromLeft}
-                    transition={{ 
-                      duration: 0.8, 
-                      delay: (index % 4) * 0.1,
-                      ease: "easeOut"
-                    }}
-                    whileHover={{ scale: 1.02, y: -5 }}
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                    data-aos-delay={`${(index % 4) * 100}`}
                   >
                     <div className="gallery__image-wrapper">
                       <img 
@@ -174,10 +138,10 @@ const Gallery: React.FC = () => {
                         <h3 className="gallery__image-title">{image.title}</h3>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           )}
         </div>
       </div>

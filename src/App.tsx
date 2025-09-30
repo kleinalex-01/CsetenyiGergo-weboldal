@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -10,20 +11,22 @@ import './styles/main.scss';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <div className="app">
-        <Header />
-        <main style={{ paddingTop: '80px', minHeight: 'calc(100vh - 160px)' }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/szolgaltatasok" element={<Services />} />
-            <Route path="/galeria" element={<Gallery />} />
-            <Route path="/kapcsolat" element={<Contact />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <div className="app">
+          <Header />
+          <main style={{ paddingTop: '80px', minHeight: 'calc(100vh - 160px)' }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/szolgaltatasok" element={<Services />} />
+              <Route path="/galeria" element={<Gallery />} />
+              <Route path="/kapcsolat" element={<Contact />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 };
 
