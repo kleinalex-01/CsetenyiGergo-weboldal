@@ -32,8 +32,8 @@ const Services: React.FC = () => {
         <meta property="og:title" content="Szolgáltatások - Csetényi Gépészet" />
         <meta property="og:description" content="Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://csetenyigergo.hu/szolgaltatasok" />
-        <meta property="og:image" content="https://csetenyigergo.hu/images/services-og-image.jpg" />
+        <meta property="og:url" content={`${window.location.origin}/szolgaltatasok`} />
+        <meta property="og:image" content={`${window.location.origin}/images/services-og-image.jpg`} />
         <meta property="og:locale" content="hu_HU" />
         <meta property="og:site_name" content="Csetényi Gépészet" />
         
@@ -41,13 +41,13 @@ const Services: React.FC = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Szolgáltatások - Csetényi Gépészet" />
         <meta name="twitter:description" content="Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák." />
-        <meta name="twitter:image" content="https://csetenyigergo.hu/images/services-twitter-image.jpg" />
+        <meta name="twitter:image" content={`${window.location.origin}/images/services-twitter-image.jpg`} />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Csetényi Gépészet" />
         <meta name="language" content="hu" />
-        <link rel="canonical" href="https://csetenyigergo.hu/szolgaltatasok" />
+        <link rel="canonical" href={`${window.location.origin}/szolgaltatasok`} />
         
         {/* Structured Data (Schema.org) */}
         <script type="application/ld+json">

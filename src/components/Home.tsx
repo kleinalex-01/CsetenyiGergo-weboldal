@@ -104,7 +104,7 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              <a href="tel:+36301234567" className="btn btn--primary btn--lg">
+              <a href="tel:+36309378695" className="btn btn--primary btn--lg">
                 <span className="btn-icon">📞</span> Hívjon most!
               </a>
               <a href="mailto:csetkagepeszet@gmail.com" className="btn btn--white btn--lg">
