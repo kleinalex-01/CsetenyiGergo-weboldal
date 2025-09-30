@@ -4,11 +4,6 @@ import { FaPhone, FaEnvelope, FaFacebookF } from 'react-icons/fa';
 import Breadcrumb from './Breadcrumb';
 import LeafletMap from './LeafletMap';
 
-interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
 const Footer: React.FC = () => {
   const location = useLocation();
   
@@ -21,7 +16,7 @@ const Footer: React.FC = () => {
       '/kapcsolat': 'Kapcsolat'
     };
 
-    const items: BreadcrumbItem[] = [{ label: 'Főoldal', href: '/' }];
+    const items = [{ label: 'Főoldal', href: '/' }];
     
     if (location.pathname !== '/') {
       items.push({ 
