@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { FiChevronsDown, FiArrowRight } from 'react-icons/fi';
-import { Helmet } from 'react-helmet-async';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const Services: React.FC = () => {
   useEffect(() => {
+    // Set document title for SEO
+    document.title = 'Szolgáltatások - Csetényi Gépészet | Klíma, Fűtés, Épületgépészet';
+    
+    // Update meta description if it exists
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák. Megbízható, minőségi szolgáltatás garanciával.');
+    }
+    
     AOS.init({
       duration: 800,
       once: true,
@@ -17,89 +25,6 @@ const Services: React.FC = () => {
 
   return (
     <ParallaxProvider>
-      <Helmet>
-        <title>Szolgáltatások - Csetényi Gépészet | Klíma, Fűtés, Épületgépészet</title>
-        <meta 
-          name="description" 
-          content="Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák. Megbízható, minőségi szolgáltatás garanciával." 
-        />
-        <meta 
-          name="keywords" 
-          content="klímatelepítés, fűtésszerelés, padlófűtés, épületgépészet, gépész, klímaszerelés, fűtés javítás, légkondicionáló, radiátor" 
-        />
-        
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Szolgáltatások - Csetényi Gépészet" />
-        <meta property="og:description" content="Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://csetenyigergo.hu/szolgaltatasok" />
-        <meta property="og:image" content="https://csetenyigergo.hu/images/services-og-image.jpg" />
-        <meta property="og:locale" content="hu_HU" />
-        <meta property="og:site_name" content="Csetényi Gépészet" />
-        
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Szolgáltatások - Csetényi Gépészet" />
-        <meta name="twitter:description" content="Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák." />
-        <meta name="twitter:image" content="https://csetenyigergo.hu/images/services-twitter-image.jpg" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Csetényi Gépészet" />
-        <meta name="language" content="hu" />
-        <link rel="canonical" href="https://csetenyigergo.hu/szolgaltatasok" />
-        
-        {/* Structured Data (Schema.org) */}
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Csetényi Gépészet",
-              "description": "Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák",
-              "url": "https://csetenyigergo.hu/szolgaltatasok",
-              "serviceType": ["Klímatelepítés", "Fűtésszerelés", "Padlófűtés", "Épületgépészet"],
-              "areaServed": "Hungary",
-              "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "Gépészeti Szolgáltatások",
-                "itemListElement": [
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Klímatelepítés és szerelés",
-                      "description": "Professzionális klímaberendezések telepítése és karbantartása"
-                    }
-                  },
-                  {
-                    "@type": "Offer", 
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Fűtés és padlófűtés szerelés",
-                      "description": "Korszerű fűtési rendszerek telepítése és karbantartása"
-                    }
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service", 
-                      "name": "Épületgépészeti munkák",
-                      "description": "Komplex épületgépészeti rendszerek tervezése és kivitelezése"
-                    }
-                  }
-                ]
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+36-30-937-8695",
-                "contactType": "customer service",
-                "availableLanguage": "Hungarian"
-              }
-            }
-          `}
-        </script>
-      </Helmet>
       
       <section id="services" className="services">
         {/* Hero Section with animated background */}

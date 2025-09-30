@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   label: string;
   href?: string;
 }

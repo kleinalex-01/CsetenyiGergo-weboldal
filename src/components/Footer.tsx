@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaFacebookF } from 'react-icons/fa';
-import Breadcrumb from './Breadcrumb';
+import Breadcrumb, { type BreadcrumbItem } from './Breadcrumb';
 import LeafletMap from './LeafletMap';
 
 const Footer: React.FC = () => {
@@ -16,11 +16,12 @@ const Footer: React.FC = () => {
       '/kapcsolat': 'Kapcsolat'
     };
 
-    const items = [{ label: 'Főoldal', href: '/' }];
+    const items: BreadcrumbItem[] = [{ label: 'Főoldal', href: '/' }];
     
     if (location.pathname !== '/') {
       items.push({ 
         label: pathToName[location.pathname] || 'Oldal'
+        // No href for current page (breadcrumb convention)
       });
     }
     
