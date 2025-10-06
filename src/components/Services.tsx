@@ -81,10 +81,10 @@ const Services: React.FC = () => {
               <h2 id="climate-title" className="services__climate-title">Klímatelepítés és Klímaszerelés</h2>
               <div className="services__climate-description">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+                  Professzionális klímatelepítési és klímaszerelési szolgáltatások. Kizárólag megbízható, energiatakarékos klímaberendezéseket 
+                  telepítünk, különös tekintettel a Midea márkára, amely a legmodernebb technológiát és 
+                  kiváló minőséget képviseli. Tapasztalatunk garantálja a szakszerű telepítést, 
+                  beüzemelést és hosszú távú megbízhatóságot, hogy otthona mindig a kívánt hőmérsékleten legyen.
                 </p>
               </div>
               
