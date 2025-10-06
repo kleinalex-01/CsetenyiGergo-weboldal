@@ -26,9 +26,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'pwa-192x192.png'],
       manifest: {
-        name: 'MyApp',
-        short_name: 'MyApp',
-        description: 'A modern progressive web application built with React, TypeScript, and SCSS',
+        name: 'Csetényi Gépészet - Klíma és Fűtésszerelés',
+        short_name: 'Csetényi Gépészet',
+        description: 'Professzionális klímatelepítés, klímaszerelés, fűtésszerelés és karbantartás. Megbízható gépészeti szolgáltatások garanciával.',
+        lang: 'hu',
         theme_color: '#22c55e',
         background_color: '#ffffff',
         display: 'standalone',
@@ -79,6 +80,16 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: false, // Disable in production for security
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          animations: ['framer-motion', 'aos'],
+        },
+      },
+    },
+    // Copy .htaccess to dist folder
+    copyPublicDir: true,
   }
 })

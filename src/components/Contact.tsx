@@ -32,6 +32,10 @@ const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState<number>(0);
+
+  // Rate limiting: prevent spam submissions (1 minute cooldown)
+  const SUBMIT_COOLDOWN = 60000; // 60 seconds
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -75,6 +79,14 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Rate limiting check
+    const now = Date.now();
+    if (now - lastSubmitTime < SUBMIT_COOLDOWN) {
+      const remainingSeconds = Math.ceil((SUBMIT_COOLDOWN - (now - lastSubmitTime)) / 1000);
+      alert(`Kérjük, várjon ${remainingSeconds} másodpercet a következő üzenet küldése előtt.`);
+      return;
+    }
+    
     if (!validateForm()) {
       return;
     }
@@ -86,15 +98,23 @@ const Contact: React.FC = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
+      // Sanitize inputs before creating mailto link
+      const sanitizedSubject = formData.subject.replace(/[<>]/g, '');
+      const sanitizedName = formData.name.replace(/[<>]/g, '');
+      const sanitizedEmail = formData.email.replace(/[<>]/g, '');
+      const sanitizedPhone = formData.phone.replace(/[<>]/g, '');
+      const sanitizedMessage = formData.message.replace(/[<>]/g, '');
+      
       // Create mailto link as fallback
-      const mailtoLink = `mailto:csetkagepeszet@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Név: ${formData.name}\nEmail: ${formData.email}\nTelefon: ${formData.phone}\n\nÜzenet:\n${formData.message}`
+      const mailtoLink = `mailto:csetkagepeszet@gmail.com?subject=${encodeURIComponent(sanitizedSubject)}&body=${encodeURIComponent(
+        `Név: ${sanitizedName}\nEmail: ${sanitizedEmail}\nTelefon: ${sanitizedPhone}\n\nÜzenet:\n${sanitizedMessage}`
       )}`;
       
       window.location.href = mailtoLink;
       
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setLastSubmitTime(now);
       
       // Close modal after success
       setTimeout(() => {

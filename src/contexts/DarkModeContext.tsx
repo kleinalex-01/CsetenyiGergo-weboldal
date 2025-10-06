@@ -22,12 +22,17 @@ interface DarkModeProviderProps {
 
 export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    // Check localStorage for saved preference
-    const savedMode = localStorage.getItem('darkMode');
-    if (savedMode !== null) {
-      return savedMode === 'true';
+    try {
+      // Check localStorage for saved preference
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode !== null) {
+        return savedMode === 'true';
+      }
+    } catch (error) {
+      // localStorage might be disabled or unavailable
+      console.warn('localStorage not available:', error);
     }
-    // Check system preference
+    // Check system preference as fallback
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
@@ -40,7 +45,11 @@ export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children }) 
     }
 
     // Save to localStorage
-    localStorage.setItem('darkMode', String(isDarkMode));
+    try {
+      localStorage.setItem('darkMode', String(isDarkMode));
+    } catch (error) {
+      console.warn('Failed to save dark mode preference:', error);
+    }
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
