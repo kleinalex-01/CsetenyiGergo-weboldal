@@ -208,7 +208,7 @@
   // Floating Action Button
   &__fab {
     position: fixed;
-    bottom: $spacing-xl;
+    bottom: 100px; // Position above the back-to-top button
     right: $spacing-xl;
     width: 70px;
     height: 70px;
@@ -237,7 +237,7 @@
     @media (max-width: 768px) {
       width: 60px;
       height: 60px;
-      bottom: $spacing-lg;
+      bottom: 80px; // Adjusted for mobile
       right: $spacing-lg;
     }
   }

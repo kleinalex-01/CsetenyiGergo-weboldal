@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import DarkModeToggle from './DarkModeToggle';
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -51,6 +52,11 @@ const Header: React.FC = () => {
               </li>
             ))}
           </ul>
+
+          {/* Dark Mode Toggle */}
+          <div className="nav__actions">
+            <DarkModeToggle />
+          </div>
 
           {/* Mobile menu toggle button */}
           <button
@@ -117,6 +123,17 @@ const Header: React.FC = () => {
                     </Link>
                   </motion.div>
                 ))}
+                
+                {/* Dark Mode Toggle in Mobile Menu */}
+                <motion.div
+                  className="mobile-menu__dark-mode"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 30 }}
+                  transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
+                >
+                  <DarkModeToggle />
+                </motion.div>
               </nav>
             </motion.div>
           </motion.div>

@@ -1,20 +1,12 @@
 import React, { useEffect } from 'react';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { FiChevronsDown, FiArrowRight } from 'react-icons/fi';
+import SEO from './SEO';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const Services: React.FC = () => {
   useEffect(() => {
-    // Set document title for SEO
-    document.title = 'Szolgáltatások - Csetényi Gépészet | Klíma, Fűtés, Épületgépészet';
-    
-    // Update meta description if it exists
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Professzionális gépészeti szolgáltatások: klímatelepítés, fűtésszerelés, padlófűtés és épületgépészeti munkák. Megbízható, minőségi szolgáltatás garanciával.');
-    }
-    
     AOS.init({
       duration: 800,
       once: true,
@@ -25,6 +17,12 @@ const Services: React.FC = () => {
 
   return (
     <ParallaxProvider>
+      <SEO 
+        title="Szolgáltatások"
+        description="Professzionális gépészeti szolgáltatások: klímatelepítés és karbantartás, fűtésszerelés, padlófűtés, radiátoros fűtési rendszerek telepítése és vegyszeres tisztítása. Megbízható, minőségi munka garanciával."
+        keywords="klímatelepítés, klímaszerelés, klíma karbantartás, fűtésszerelés, padlófűtés, radiátoros fűtés, hőszivattyú, vegyszeres tisztítás, Kan-Therm, PE-RT, Fernox"
+        ogImage="https://csetenyigergo.hu/images/climate/climate-1.jpg"
+      />
       
       <section id="services" className="services">
         {/* Hero Section with animated background */}
@@ -46,7 +44,22 @@ const Services: React.FC = () => {
               <p className="services__hero-subtitle">
                 Itt ismerkedhet meg részletesebben a munkafolyamatokkal
               </p>
-              <div className="services__hero-arrow">
+              <div 
+                className="services__hero-arrow"
+                onClick={() => {
+                  const climateSection = document.getElementById('climate-title');
+                  climateSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                role="button"
+                aria-label="Scroll to climate section"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    const climateSection = document.getElementById('climate-title');
+                    climateSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
                 <FiChevronsDown />
               </div>
             </div>
@@ -109,33 +122,39 @@ const Services: React.FC = () => {
               data-aos="fade-up"
               data-aos-duration="800"
             >
-              <h2 id="heating-title" className="services__heating-title">Fűtés és Padlófűtés Szerelés</h2>
-              <div className="services__heating-description">
+              <h2 id="heating-title" className="services__heating-title">Fűtés és Padlófűtés</h2>
+              
+              <div className="services__heating-intro" data-aos="fade-up" data-aos-delay="100">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+                  „Szakszerű padlófűtés kivitelezés a legmodernebb rendszerekkel – legyen szó 
+                  klasszikus megoldásról vagy alacsony építési magasságú Tricox Octa rendszerről. 
+                  Megbízható technológia, precíz szerelés és tartós kényelem az otthonodban."
                 </p>
               </div>
               
-              <div className="services__heating-benefits">
-                <div className="services__heating-benefit" data-aos="fade-up" data-aos-delay="200">
-                  <div className="services__heating-check">✓</div>
-                  <span></span>
-                </div>
-                <div className="services__heating-benefit" data-aos="fade-up" data-aos-delay="300">
-                  <div className="services__heating-check">✓</div>
-                  <span></span>
-                </div>
-                <div className="services__heating-benefit" data-aos="fade-up" data-aos-delay="400">
-                  <div className="services__heating-check">✓</div>
-                  <span></span>
-                </div>
-                <div className="services__heating-benefit" data-aos="fade-up" data-aos-delay="500">
-                  <div className="services__heating-check">✓</div>
-                  <span></span>
-                </div>
+              <h3 className="services__heating-subtitle" data-aos="fade-up" data-aos-delay="200">
+                Modern megoldások
+              </h3>
+              
+              <div className="services__heating-description" data-aos="fade-up" data-aos-delay="300">
+                <p>
+                  Padlófűtés renszerek szakszerű kivitelezése az ön igényeinek megfelelően. 
+                  Az átadás előtt gondoskodunk minden szükséges beállításról, hogy a lehető 
+                  legtökéletesebb legyen a végeredmény.
+                </p>
+              </div>
+              
+              <h3 className="services__heating-systems-title" data-aos="fade-up" data-aos-delay="400">
+                Rendszerek
+              </h3>
+              
+              <div className="services__heating-systems" data-aos="fade-up" data-aos-delay="500">
+                <button className="services__heating-system-btn services__heating-system-btn--kan-therm">
+                  Kan-Therm
+                </button>
+                <button className="services__heating-system-btn services__heating-system-btn--pert">
+                  PE-RT
+                </button>
               </div>
             </div>
           </div>
@@ -153,33 +172,30 @@ const Services: React.FC = () => {
               data-aos="fade-up"
               data-aos-duration="800"
             >
-              <h2 id="building-title" className="services__building-title">Épületgépészeti Rendszerek</h2>
-              <div className="services__building-description">
+              <h2 id="building-title" className="services__building-title">Radiátoros fűtési rendszerek</h2>
+              
+              <h3 className="services__building-subtitle" data-aos="fade-up" data-aos-delay="200">
+                Radiátoros fűtési rendszerek kivitelezése
+              </h3>
+              
+              <div className="services__building-description" data-aos="fade-up" data-aos-delay="300">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+                  Radiátoros fűtési rendszerek teljes körű kivitelezése. Szerelés az igényekhez igazodva 
+                  padlóban rejtve vagy falon kívül. Gyors, hatékony hőleadás, könnyen illeszthető meglévő 
+                  vagy új épületekhez. Hosszú távú működés és energiatakarékos fűtés.
                 </p>
               </div>
               
-              <div className="services__building-benefits">
-                <div className="services__building-benefit" data-aos="fade-up" data-aos-delay="200">
-                  <div className="services__building-check">✓</div>
-                  <span></span>
-                </div>
-                <div className="services__building-benefit" data-aos="fade-up" data-aos-delay="300">
-                  <div className="services__building-check">✓</div>
-                  <span></span>
-                </div>
-                <div className="services__building-benefit" data-aos="fade-up" data-aos-delay="400">
-                  <div className="services__building-check">✓</div>
-                  <span></span>
-                </div>
-                <div className="services__building-benefit" data-aos="fade-up" data-aos-delay="500">
-                  <div className="services__building-check">✓</div>
-                  <span></span>
-                </div>
+              <h3 className="services__building-subtitle services__building-subtitle--cleaning" data-aos="fade-up" data-aos-delay="400">
+                Fűtési rendszerek vegyszeres tisztítása
+              </h3>
+              
+              <div className="services__building-description" data-aos="fade-up" data-aos-delay="500">
+                <p>
+                  Idővel lerakódások halmozódnak fel a rendszerben, rontva a hatásfokot. Vegyszeres tisztítást 
+                  végzünk <strong>Kammak PROF-03/35</strong> berendezéssel és <strong>Fernox</strong> szerekkel. 
+                  Csökken az energiafelhasználás, optimális működés, hosszabb élettartam.
+                </p>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import SEO from './SEO';
 
 interface FormData {
   name: string;
@@ -110,6 +111,12 @@ const Contact: React.FC = () => {
 
   return (
     <ParallaxProvider>
+      <SEO 
+        title="Kapcsolat"
+        description="Vegye fel velünk a kapcsolatot! Klíma és fűtésszerelés szolgáltatásainkkal kapcsolatban érdeklődjön telefonon, e-mailben vagy személyesen."
+        keywords="kapcsolat, klímaszerelés elérhetőség, fűtésszerelés kapcsolat, cím, telefonszám, e-mail, térkép, ajánlatkérés"
+        ogImage="contact-hero.jpg"
+      />
       <section className="contact-hub">
         {/* Parallax Dot Grid Background */}
         <Parallax speed={-20} className="contact-hub__hero-parallax-bg">

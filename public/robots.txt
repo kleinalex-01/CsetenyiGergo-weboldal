@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://csetenyigergo.hu/sitemap.xml
+
+# Disallow certain paths
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/

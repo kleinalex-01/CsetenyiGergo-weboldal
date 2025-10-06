@@ -39,6 +39,10 @@
 @use 'components/modal';
 @use 'components/form';
 @use 'components/loading-skeleton';
+@use 'components/error-boundary';
+@use 'components/back-to-top';
+@use 'components/lightbox';
+@use 'components/dark-mode';
 
 // 6. PAGES - Page-specific styles
 // -----------------------------------------------------------------------------

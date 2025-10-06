@@ -148,6 +148,16 @@
       }
     }
 
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      @include mobile {
+        display: none;
+      }
+    }
+
     &__mobile-toggle {
       display: none;
       flex-direction: column;
@@ -280,6 +290,12 @@
         outline: 2px solid $primary-color;
         outline-offset: 2px;
       }
+    }
+
+    .mobile-menu__dark-mode {
+      display: flex;
+      justify-content: center;
+      margin-top: $spacing-md;
     }
   }
 }

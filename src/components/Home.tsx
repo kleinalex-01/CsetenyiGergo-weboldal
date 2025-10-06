@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import SEO from './SEO';
+import LoadingSkeleton from './LoadingSkeleton';
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -22,6 +24,7 @@ const Home: React.FC = () => {
       icon: '❄️',
       benefits: ['Megbízható márkák', 'Gyors telepítés', 'Garancia minden munkára', 'Esztétikus megjelenés'],
       images: ['/images/klima1.jpeg', '/images/klima2.jpeg', '/images/klima3.jpeg'],
+      link: '/szolgaltatasok#climate-title',
     },
     {
       title: 'Fűtés/Padlófűtés szerelés',
@@ -29,6 +32,7 @@ const Home: React.FC = () => {
       icon: '🔥',
       benefits: ['Korszerű technológiák', 'Egyedi tervezés', 'Hosszú távú megoldás', 'Otthona kényelme'],
       images: ['/images/padlofutes1.jpeg', '/images/padlofutes2.jpeg', '/images/padlofutes3.jpeg'],
+      link: '/szolgaltatasok#heating-title',
     },
     {
       title: 'Hőszivattyúk telepítése',
@@ -36,6 +40,7 @@ const Home: React.FC = () => {
       icon: '⚡',
       benefits: ['Átlátható megoldások', 'Energiahatékonyság', 'Stabil hőérzet', 'Hosszú élettartam'],
       images: ['/images/hoszivattyu1.jpeg', '/images/hoszivattyu2.jpeg', '/images/hoszivattyu3.jpeg'],
+      link: '/szolgaltatasok#heating-title',
     },
   ], []);
 
@@ -67,6 +72,12 @@ const Home: React.FC = () => {
 
   return (
     <ParallaxProvider>
+      <SEO 
+        title="Kezdőlap"
+        description="Professzionális gépészeti szolgáltatások - klímatelepítés, fűtésszerelés, padlófűtés, hőszivattyúk telepítése. Több éves tapasztalat, megbízható kivitelezés."
+        keywords="klímatelepítés, klímaszerelés, fűtésszerelés, padlófűtés, hőszivattyú, gépészet, Budapest, klíma karbantartás"
+        ogImage="https://csetenyigergo.hu/images/hero-image1.jpeg"
+      />
       <section id="home" className="home">
         {/* Hero Section */}
         <section className="home__hero">
@@ -148,10 +159,10 @@ const Home: React.FC = () => {
                 >
                   <LazyLoadImage
                     src={image}
-                    alt={`Hero image ${index + 1}`}
+                    alt={`Gépészeti munkák bemutatása - ${index === 0 ? 'Klímaszerelés és légkondicionálás' : index === 1 ? 'Fűtésrendszer telepítés és karbantartás' : 'Hőszivattyú rendszerek és padlófűtés'}`}
                     className="home__hero-image"
                     effect="blur"
-                    placeholderSrc={`https://via.placeholder.com/600x400/f0fdf4/22c55e?text=Loading...`}
+                    placeholder={<LoadingSkeleton variant="carousel" />}
                     onError={(e) => {
                       // Fallback for missing images
                       const target = e.target as HTMLImageElement;
@@ -254,7 +265,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Itt találod munkásságunk dióhéjban. További információkért, nézd meg a <a href="#services" className="home__services-link">Szolgáltatások</a> oldalt.
+            Itt találod munkásságunk dióhéjban. További információkért, nézd meg a <a href="/szolgaltatasok" className="home__services-link">Szolgáltatások</a> oldalt.
           </motion.p>
           <motion.div
             className="home__services-grid"
@@ -282,10 +293,10 @@ const Home: React.FC = () => {
                       >
                         <LazyLoadImage
                           src={image}
-                          alt={`${service.title} ${imageIndex + 1}`}
+                          alt={`${service.title} - referencia kép ${imageIndex + 1}. Professzionális kivitelezés és minőségi munka bemutatása`}
                           className="home__service-image"
                           effect="blur"
-                          placeholderSrc={`https://via.placeholder.com/400x300/f0fdf4/22c55e?text=Loading...`}
+                          placeholder={<LoadingSkeleton variant="image" />}
                         />
                       </div>
                     ))}
@@ -295,7 +306,7 @@ const Home: React.FC = () => {
                 <div className="home__service-content">
                   <h3 className="home__service-title">{service.title}</h3>
                   <p className="home__service-description">{service.description}</p>
-                  <a href="#contact" className="home__service-cta btn btn--primary btn--sm">
+                  <a href={service.link} className="home__service-cta btn btn--primary btn--sm">
                     Bővebben
                   </a>
                 </div>

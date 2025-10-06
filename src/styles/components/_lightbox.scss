@@ -1,0 +1,340 @@
+// ==========================================================================
+// LIGHTBOX COMPONENT
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: z('modal') + 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  &__close {
+    position: absolute;
+    top: $spacing-lg;
+    right: $spacing-lg;
+    z-index: z('modal') + 12;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: $white;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+
+    @include mobile {
+      top: $spacing-md;
+      right: $spacing-md;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+    }
+  }
+
+  &__zoom-controls {
+    position: absolute;
+    top: $spacing-lg;
+    left: $spacing-lg;
+    z-index: z('modal') + 12;
+
+    @include mobile {
+      top: $spacing-md;
+      left: $spacing-md;
+    }
+  }
+
+  &__zoom-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: $white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+
+    @include mobile {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: z('modal') + 12;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: $white;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+
+    &--prev {
+      left: $spacing-xl;
+
+      @include mobile {
+        left: $spacing-md;
+      }
+    }
+
+    &--next {
+      right: $spacing-xl;
+
+      @include mobile {
+        right: $spacing-md;
+      }
+    }
+
+    @include mobile {
+      width: 45px;
+      height: 45px;
+      font-size: 24px;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: z('modal') + 11;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+
+    &--zoomed {
+      transform: scale(1.5);
+      cursor: zoom-out;
+
+      @include mobile {
+        transform: scale(1.2);
+      }
+    }
+
+    @include mobile {
+      max-width: 95vw;
+      max-height: 80vh;
+    }
+  }
+
+  &__image {
+    max-width: 100%;
+    max-height: calc(85vh - 100px);
+    object-fit: contain;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+
+    .lightbox__content--zoomed & {
+      cursor: zoom-out;
+    }
+
+    @include mobile {
+      max-height: calc(80vh - 120px);
+    }
+  }
+
+  &__info {
+    margin-top: $spacing-lg;
+    text-align: center;
+    color: $white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: $spacing-md $spacing-xl;
+    border-radius: $border-radius-lg;
+    backdrop-filter: blur(10px);
+
+    @include mobile {
+      margin-top: $spacing-md;
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-xs 0;
+    color: $primary-color;
+
+    @include mobile {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__counter {
+    font-size: $font-size-sm;
+    margin: 0;
+    opacity: 0.8;
+
+    @include mobile {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__thumbnails {
+    position: absolute;
+    bottom: $spacing-lg;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: z('modal') + 11;
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: $border-radius-lg;
+    backdrop-filter: blur(10px);
+    max-width: 90vw;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: $primary-color rgba(255, 255, 255, 0.1);
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $primary-color;
+      border-radius: 3px;
+
+      &:hover {
+        background: $secondary-color;
+      }
+    }
+
+    @include mobile {
+      bottom: $spacing-md;
+      gap: $spacing-xs;
+      padding: $spacing-sm;
+    }
+  }
+
+  &__thumbnail {
+    width: 80px;
+    height: 60px;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+
+      img {
+        transform: scale(1.1);
+      }
+    }
+
+    &--active {
+      border-color: $primary-color;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+    }
+
+    @include mobile {
+      width: 60px;
+      height: 45px;
+    }
+  }
+
+  // Animations
+  @keyframes lightboxFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes lightboxScaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // Accessibility
+  &__close,
+  &__zoom-btn,
+  &__nav,
+  &__thumbnail {
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+  }
+}
