@@ -89,13 +89,40 @@
   // Update gradients for dark mode
   .home__hero,
   .gallery,
-  .services {
+  .services,
+  .services__hero,
+  .home__services {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   }
 
+  // Update dot grid backgrounds
+  .services__hero-background,
+  .services__heating-parallax-bg,
+  .services__cta-parallax-bg {
+    background-image: radial-gradient(circle, rgba(100, 116, 139, 0.15) 1.5px, transparent 1.5px);
+  }
+
+  // Update section backgrounds
+  .services__heating,
+  .services__cta {
+    background: var(--bg-primary);
+  }
+
+  // Update text colors in Services sections
+  .services__heating-title,
+  .services__heating-subtitle,
+  .services__heating-systems-title,
+  .services__cta-title {
+    color: var(--text-primary);
+  }
+
+  .services__heating-intro p,
+  .services__heating-description p {
+    color: var(--text-secondary);
+  }
+
   // Update cards
-  .home__service,
-  .home__why-choose-card,
+  .home__service-card,
   .contact-hub__card,
   .services__card {
     background: var(--card-bg);
@@ -123,12 +150,41 @@
     border-bottom-color: var(--border-color);
   }
 
-  .navigation__link {
+  .navigation__link,
+  .nav__link {
     color: var(--text-secondary);
 
     &:hover,
-    &--active {
+    &--active,
+    &.active {
       color: $primary-color;
+    }
+  }
+
+  // Hamburger menu turns green in dark mode
+  .nav__hamburger-line {
+    background-color: $primary-color; // Green in dark mode
+  }
+
+  // Mobile menu icons - solid dark background in dark mode
+  .mobile-menu__link {
+    background: rgba(15, 23, 42, 0.98) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 2px solid rgba(34, 197, 94, 0.5);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3), 0 2px 10px rgba(0, 0, 0, 0.5);
+
+    &:hover,
+    &:focus {
+      background: rgba(30, 41, 59, 1) !important;
+      border-color: $primary-color;
+      box-shadow: 0 8px 30px rgba(34, 197, 94, 0.6), 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    &.active {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(16, 185, 129, 0.25) 100%) !important;
+      border-color: $primary-color;
+      box-shadow: 0 8px 30px rgba(34, 197, 94, 0.7), 0 4px 15px rgba(0, 0, 0, 0.6);
     }
   }
 
@@ -165,8 +221,7 @@
   }
 
   // Update shadows
-  .home__service,
-  .home__why-choose-card,
+  .home__service-card,
   .gallery__image-container,
   .contact-hub__card {
     box-shadow: 0 8px 25px var(--shadow-color);
@@ -206,6 +261,162 @@
 
     &--2 {
       background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+    }
+  }
+
+  // Home hero title - ensure text is visible in dark mode
+  .hero-title-word {
+    &--klimaepuletepeszet {
+      color: var(--text-primary) !important;
+    }
+  }
+
+  // Services section specific overrides
+  .home__services-title,
+  .home__services-subtitle {
+    color: var(--text-primary);
+  }
+
+  .home__services-background {
+    background-image: radial-gradient(circle, rgba(100, 116, 139, 0.15) 1.5px, transparent 1.5px);
+  }
+
+  .home__service-title {
+    color: var(--text-primary);
+  }
+
+  .home__service-description {
+    color: var(--text-secondary);
+  }
+
+  .home__service-card:hover .home__service-title {
+    color: $primary-color !important;
+  }
+
+  // White button - adapt to dark mode
+  .btn--white {
+    background: rgba(30, 41, 59, 0.95) !important;
+    color: $primary-color !important;
+    border-color: $primary-color !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 50%, darken($primary-color, 15%) 100%) !important;
+      color: $white !important;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.5);
+    }
+
+    &:focus {
+      background: rgba(30, 41, 59, 0.98) !important;
+      color: $primary-color !important;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.4), 0 4px 12px rgba(34, 197, 94, 0.3);
+    }
+  }
+
+  // Gallery category buttons - inactive buttons should be visible in dark mode
+  .gallery__category-btn {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(71, 85, 105, 0.8);
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+
+    &:hover:not(.gallery__category-btn--active) {
+      background: rgba(51, 65, 85, 0.95);
+      border-color: rgba(34, 197, 94, 0.3);
+      color: var(--text-primary);
+    }
+
+    // Active button keeps the green gradient
+    &--active {
+      background: linear-gradient(135deg, $primary-color, $secondary-color) !important;
+      border-color: $primary-color !important;
+      color: $white !important;
+    }
+  }
+
+  // Contact page title and subtitle
+  .contact-hub__title {
+    color: var(--text-primary) !important;
+  }
+
+  .contact-hub__subtitle {
+    color: var(--text-secondary);
+  }
+
+  // Contact card titles and subtitles
+  .contact-hub__card-title {
+    color: var(--text-primary);
+  }
+
+  .contact-hub__card-subtitle {
+    color: var(--text-secondary);
+  }
+
+  // Contact modal form - full dark mode support
+  .contact-hub__modal-backdrop {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .contact-hub__modal {
+    background: var(--card-bg);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .contact-hub__modal-header {
+    border-bottom-color: var(--border-color);
+  }
+
+  .contact-hub__modal-title {
+    color: var(--text-primary);
+  }
+
+  .contact-hub__modal-close {
+    color: var(--text-secondary);
+
+    &:hover {
+      background: rgba(71, 85, 105, 0.3);
+      color: var(--text-primary);
+    }
+  }
+
+  // Form elements in contact modal
+  .contact-hub__form {
+    .form__label {
+      color: var(--text-primary);
+    }
+
+    .form__control {
+      background: rgba(30, 41, 59, 0.5);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+
+      &::placeholder {
+        color: var(--text-secondary);
+        opacity: 0.6;
+      }
+
+      &:focus {
+        background: rgba(30, 41, 59, 0.7);
+        border-color: $primary-color;
+      }
+
+      &--error {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.1);
+      }
+    }
+
+    .form__error {
+      color: #fca5a5;
+    }
+
+    textarea.form__control {
+      background: rgba(30, 41, 59, 0.5);
+      color: var(--text-primary);
+
+      &:focus {
+        background: rgba(30, 41, 59, 0.7);
+      }
     }
   }
 

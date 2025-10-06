@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import DarkModeToggle from './DarkModeToggle';
+import { useDarkMode } from '../contexts/DarkModeContext';
 
 const Header: React.FC = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isDarkMode } = useDarkMode();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -35,7 +37,11 @@ const Header: React.FC = () => {
         <nav className="nav">
           <div className="nav__brand">
             <Link to="/" className="nav__brand-link">
-              <img src="/images/logo.jpg" alt="Csetényi Gépészet Logo" className="nav__logo" />
+              <img 
+                src={isDarkMode ? "/images/logo-theme.png" : "/images/logo.png"} 
+                alt="Csetényi Gépészet Logo" 
+                className="nav__logo" 
+              />
             </Link>
           </div>
 
@@ -53,24 +59,27 @@ const Header: React.FC = () => {
             ))}
           </ul>
 
-          {/* Dark Mode Toggle */}
-          <div className="nav__actions">
+          {/* Desktop Dark Mode Toggle */}
+          <div className="nav__actions nav__actions--desktop">
             <DarkModeToggle />
           </div>
 
-          {/* Mobile menu toggle button */}
-          <button
-            className={`nav__mobile-toggle ${isMobileMenuOpen ? 'open' : ''}`}
-            onClick={toggleMobileMenu}
-            aria-label={isMobileMenuOpen ? 'Menü bezárása' : 'Menü megnyitása'}
-            aria-expanded={isMobileMenuOpen}
-          >
-            <div className="nav__hamburger-icon">
-              <span className="nav__hamburger-line"></span>
-              <span className="nav__hamburger-line"></span>
-              <span className="nav__hamburger-line"></span>
-            </div>
-          </button>
+          {/* Mobile actions: Dark Mode Toggle + Hamburger Menu */}
+          <div className="nav__actions nav__actions--mobile">
+            <DarkModeToggle />
+            <button
+              className={`nav__mobile-toggle ${isMobileMenuOpen ? 'open' : ''}`}
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? 'Menü bezárása' : 'Menü megnyitása'}
+              aria-expanded={isMobileMenuOpen}
+            >
+              <div className="nav__hamburger-icon">
+                <span className="nav__hamburger-line"></span>
+                <span className="nav__hamburger-line"></span>
+                <span className="nav__hamburger-line"></span>
+              </div>
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -123,17 +132,6 @@ const Header: React.FC = () => {
                     </Link>
                   </motion.div>
                 ))}
-                
-                {/* Dark Mode Toggle in Mobile Menu */}
-                <motion.div
-                  className="mobile-menu__dark-mode"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 30 }}
-                  transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
-                >
-                  <DarkModeToggle />
-                </motion.div>
               </nav>
             </motion.div>
           </motion.div>
